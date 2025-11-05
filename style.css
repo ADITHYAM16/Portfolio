@@ -1,0 +1,256 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #1f1c2c, #928dab);
+    color: #fff;
+    scroll-behavior: smooth;
+}
+
+/* Navbar */
+.navbar {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+    background: rgba(0,0,0,0.6);
+    z-index: 1000;
+}
+
+.navbar .logo {
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.navbar ul {
+    display: flex;
+    list-style: none;
+}
+
+.navbar li {
+    margin-left: 2rem;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.navbar a:hover, .navbar a.active {
+    color: #ffb347;
+}
+
+/* Sections */
+skills-section {
+    padding: 20px 20px;
+    min-height: 20px;
+     margin-bottom: 20px;
+     padding-bottom: 20px;
+}
+
+
+section {
+    padding: 100px 50px;
+    min-height: 100vh;
+}
+
+/* Home */
+skills-section {
+    padding: 20px 20px;
+    min-height: 20px;
+     margin-bottom: 20px;
+     padding-bottom: 20px;
+}
+
+.home-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 50px 20px;
+    min-height: auto;
+     margin-bottom: 20px;
+}
+
+
+
+.home-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.home-content p {
+    font-size: 1.5rem;
+}
+
+/* Typing Effect */
+.skills-section {
+    padding: 20px 20px;
+    min-height: 20px;
+     margin-bottom: 20px;
+     padding-bottom: 20px;
+}
+.typing-text {
+    overflow: hidden;
+    border-right: .15em solid #fff;
+    white-space: nowrap;
+    animation: typing 3s steps(20, end), blink .75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 15ch }
+}
+
+@keyframes blink {
+    from, to { border-color: transparent }
+    50% { border-color: white; }
+}
+
+/* About */
+.skills-section {
+    padding: 20px 20px;
+    min-height: 20px;
+     margin-bottom: 20px;
+     padding-bottom: 20px;
+}
+.about-section {
+    text-align: center;
+}
+
+
+.about-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.profile-pic {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #ffb347;
+}
+
+/* Skills */
+.skills-section {
+    padding: 50px 20px;
+    min-height: 20;
+     margin-bottom: 20px;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.skill-card {
+    background: rgba(225, 107, 120, 0.2);
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: 600;
+    transition: transform 0.3s, background 0.3s;
+}
+
+.skill-card:hover {
+    transform: translateY(-10px);
+    background: rgb(230, 230, 28);
+}
+
+/* Projects */
+.projects-section {
+    padding: 50px 20px;
+    min-height: auto;
+     margin-bottom: 20px;
+}
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.project-card {
+    background: rgba(218, 87, 87, 0.1);
+    padding: 1.5rem;
+    border-radius: 12px;
+    transition: transform 0.3s, background 0.3s;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    background: rgba(232, 232, 25, 0.934);
+}
+
+/* Contact */
+.contact-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 500px;
+    margin: auto;
+}
+
+.contact-section input, .contact-section textarea {
+    padding: 1rem;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+}
+
+.contact-section button {
+    padding: 1rem;
+    border: none;
+    border-radius: 8px;
+    background: #ffb347;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.contact-section button:hover {
+    background: #ffcc70;
+}
+
+/* Responsive */
+@media(max-width: 768px) {
+    .navbar ul {
+        flex-direction: column;
+        background: rgba(0,0,0,0.8);
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 200px;
+        display: none;
+    }
+    .navbar ul.show {
+        display: flex;
+    }
+}
+/* Fade-in animation */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.fade-in.show {
+    opacity: 1;
+    transform: translateY(0);
+}
