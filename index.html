@@ -7,11 +7,19 @@
     <link rel="stylesheet" href="style.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar">
-        <div class="logo">Adithya M AI Developer</div>
+        <div class="logo">Adithya M</div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
         <ul class="nav-links">
             <li><a href="#home" class="active">Home</a></li>
             <li><a href="#about">About</a></li>
@@ -23,46 +31,49 @@
 <!-- Home Section -->
     <section id="home" class="home-section">
         <div class="home-content">
-            <h1 class="typing-text">Hi, I'm Adithya</h1>
-            <p>Fullstack Developer | AI Enthusiast | Web Designer</p>
+            <h1 class="typing-text">Hi, I'm <span>Adithya</span></h1>
+            <p><span id="typewriter"></span></p>
+        </div>
+        <div class="home-image">
+            <img src="images/adithya1.jpg" alt="Adithya Profile">
         </div>
     </section>
  <!-- About Me -->
     <section id="about" class="about-section">
         <h2>About Me</h2>
         <div class="about-content">
-            <img src="\images\adithya1.jpg" alt="Adithya Profile" class="profile-pic">
-   <p style="font-size: 18px; line-height: 1.8; text-align: center;">
-    I am <strong>Adithya</strong>, a passionate student at 
-    <strong>Mahendra Engineering College</strong>, specializing in 
-    <strong>Artificial Intelligence & Data Science</strong>. 
-    With a strong interest in <strong>web development</strong>, 
-    <strong>AI</strong>, <strong>prompt engineering</strong>, and <strong>coding</strong>, 
-    I enjoy creating <strong>modern, efficient, and user-friendly digital solutions</strong>.
-  </p>
-  
-  <p style="font-size: 18px; line-height: 1.8; text-align:center;">
-    Beyond academics, I am deeply motivated by <strong>problem-solving</strong> and enjoy 
-    taking on challenges that push me to think creatively. I have worked on projects like 
-    <strong>e-commerce platforms</strong>, <strong>weather forecasting tools</strong>, 
-    and <strong>mood-based music generators</strong>, which reflect my ability to blend 
-    innovation with functionality.
-  </p>
-  
-  <p style="font-size: 18px; line-height: 1.8; text-align:center;">
-    I believe in <strong>continuous learning</strong> and actively explore emerging 
-    technologies to stay ahead in the fast-changing tech world. With strong skills in 
-    <strong>full-stack development</strong> and a passion for building impactful 
-    applications, my long-term goal is to contribute to 
-    <strong>real-world AI-driven solutions</strong> that make a difference.
-  </p>
-  
-  <p style="font-size: 18px; line-height: 1.8; text-align:center;">
-    Outside of coding, I value <strong>teamwork, collaboration, and communication</strong>, 
-    which help me thrive in both academic and professional environments.
-  </p>
-        
-  
+            <img src="images/adithya1.jpg" alt="Adithya Profile" class="profile-pic">
+            <div class="about-text">
+                <p style="font-size: 18px; line-height: 1.8; text-align: center;">
+                    I am <strong>Adithya</strong>, a passionate student at 
+                    <strong>Mahendra Engineering College</strong>, specializing in 
+                    <strong>Artificial Intelligence & Data Science</strong>. 
+                    With a strong interest in <strong>web development</strong>, 
+                    <strong>AI</strong>, <strong>prompt engineering</strong>, and <strong>coding</strong>, 
+                    I enjoy creating <strong>modern, efficient, and user-friendly digital solutions</strong>.
+                </p>
+                
+                <p style="font-size: 18px; line-height: 1.8; text-align:center;">
+                    Beyond academics, I am deeply motivated by <strong>problem-solving</strong> and enjoy 
+                    taking on challenges that push me to think creatively. I have worked on projects like 
+                    <strong>e-commerce platforms</strong>, <strong>weather forecasting tools</strong>, 
+                    and <strong>mood-based music generators</strong>, which reflect my ability to blend 
+                    innovation with functionality.
+                </p>
+                
+                <p style="font-size: 18px; line-height: 1.8; text-align:center;">
+                    I believe in <strong>continuous learning</strong> and actively explore emerging 
+                    technologies to stay ahead in the fast-changing tech world. With strong skills in 
+                    <strong>full-stack development</strong> and a passion for building impactful 
+                    applications, my long-term goal is to contribute to 
+                    <strong>real-world AI-driven solutions</strong> that make a difference.
+                </p>
+                
+                <p style="font-size: 18px; line-height: 1.8; text-align:center;">
+                    Outside of coding, I value <strong>teamwork, collaboration, and communication</strong>, 
+                    which help me thrive in both academic and professional environments.
+                </p>
+            </div>
         </div>
     </section>
  <!-- Skills -->    
@@ -98,7 +109,7 @@
     </section>
  <!-- Contact -->
   <section id="contact" style="padding: 50px; text-align: center;">
-  <h2 style="text-align: left; color: white;">Contact Me</h2>
+  <h2 style="text-align: left; color: rgb(0, 0, 0);">Contact Me</h2>
   
   <form action="https://formspree.io/f/meoldpeg" method="POST" style="max-width: 500px; margin: auto; display: flex; flex-direction: column; gap: 15px;">
     <input type="text" name="name" placeholder="Your Name" required 
