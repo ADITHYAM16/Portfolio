@@ -1,8 +1,9 @@
 // Typewriter effect for taglines
 const taglines = [
-    "Fullstack Developer",
-    "AI Enthusiast", 
-    "Web Designer"
+    "Full Stack Developer",
+    "AI Engineer",
+    "Web Developer",
+    "UI/UX Designer"
 ];
 
 let taglineIndex = 0;
@@ -80,4 +81,25 @@ window.addEventListener('scroll', () => {
             link.classList.add('active');
         }
     });
+});
+
+// 3D Scroll Transition Effect
+const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.15
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('show-3d');
+        } else {
+            entry.target.classList.remove('show-3d');
+        }
+    });
+}, observerOptions);
+
+sections.forEach(section => {
+    observer.observe(section);
 });
