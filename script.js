@@ -58,9 +58,29 @@ hamburger.addEventListener('click', () => {
 
 // Close mobile menu when clicking on a link
 navLinksItems.forEach(link => {
-    link.addEventListener('click', () => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
         hamburger.classList.remove('active');
         navLinks.classList.remove('active');
+        
+        // Remove active class from all links and add to clicked link
+        navLinksItems.forEach(navLink => navLink.classList.remove('active'));
+        link.classList.add('active');
+        
+        // Get target section and add show-3d class immediately
+        const targetId = link.getAttribute('href').substring(1);
+        const targetSection = document.getElementById(targetId);
+        if (targetSection) {
+            targetSection.classList.add('show-3d');
+            
+            // Scroll to section with offset for navbar
+            const navbarHeight = document.querySelector('.navbar').offsetHeight;
+            const targetPosition = targetSection.offsetTop - navbarHeight;
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        }
     });
 });
 
@@ -69,12 +89,23 @@ const sections = document.querySelectorAll('section');
 
 window.addEventListener('scroll', () => {
     let current = '';
+    const scrollPosition = pageYOffset + 100;
+    
     sections.forEach(section => {
-        const sectionTop = section.offsetTop - 70;
-        if (pageYOffset >= sectionTop) {
-            current = section.getAttribute('id');
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+        
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            current = sectionId;
         }
     });
+    
+    // Handle last section (contact)
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
+        current = 'contact';
+    }
+    
     navLinksItems.forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('href') === '#' + current) {
