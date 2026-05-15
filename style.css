@@ -1,4 +1,104 @@
-/* General Styles */
+/* ============================================================
+   CSS CUSTOM PROPERTIES – LIGHT (default) & DARK THEMES
+   ============================================================ */
+:root {
+    --bg-primary:   #f8f9fa;
+    --bg-secondary: #ffffff;
+    --bg-alt:       #f8f9fa;
+    --text-primary: #333333;
+    --text-muted:   #666666;
+    --accent:       #e91e63;
+    --accent-hover: #c2185b;
+    --border:       #f0f0f0;
+    --card-bg:      #ffffff;
+    --card-alt:     #f8f9fa;
+    --shadow:       rgba(0,0,0,0.10);
+    --shadow-accent:rgba(233,30,99,0.20);
+    --nav-bg:       rgba(255,255,255,0.95);
+    --nav-mobile:   rgba(255,255,255,0.98);
+    --input-border: #333333;
+    --chatbot-bg:   #ffffff;
+    --bot-msg-bg:   #f0f0f0;
+    --transition:   background 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* ---------- DARK THEME TOKENS ---------- */
+[data-theme="dark"] {
+    --bg-primary:   #0d0a1a;
+    --bg-secondary: #110e22;
+    --bg-alt:       #0d0a1a;
+    --text-primary: #e8d5ff;
+    --text-muted:   #a88fc0;
+    --accent:       #c084fc;          /* neon purple */
+    --accent-gold:  #f5c842;          /* gold */
+    --accent-hover: #a855f7;
+    --border:       rgba(192,132,252,0.25);
+    --card-bg:      rgba(255,255,255,0.04);
+    --card-alt:     rgba(255,255,255,0.06);
+    --shadow:       rgba(0,0,0,0.55);
+    --shadow-accent:rgba(192,132,252,0.30);
+    --nav-bg:       rgba(13,10,26,0.85);
+    --nav-mobile:   rgba(13,10,26,0.98);
+    --input-border: rgba(192,132,252,0.45);
+    --chatbot-bg:   #1a1333;
+    --bot-msg-bg:   rgba(255,255,255,0.08);
+    --glow-purple:  0 0 20px rgba(192,132,252,0.55), 0 0 40px rgba(192,132,252,0.25);
+    --glow-gold:    0 0 15px rgba(245,200,66,0.50), 0 0 30px rgba(245,200,66,0.20);
+}
+
+/* ============================================================
+   DARK – ANIMATED BACKGROUND GRID
+   ============================================================ */
+[data-theme="dark"] body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(192,132,252,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(192,132,252,0.04) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    z-index: 0;
+    animation: gridShift 20s linear infinite;
+}
+
+@keyframes gridShift {
+    0%   { background-position: 0 0; }
+    100% { background-position: 50px 50px; }
+}
+
+/* ============================================================
+   DARK – HERO ORBS
+   ============================================================ */
+[data-theme="dark"] .home-section::before,
+[data-theme="dark"] .home-section::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    pointer-events: none;
+    z-index: 0;
+    animation: orbFloat 8s ease-in-out infinite alternate;
+}
+[data-theme="dark"] .home-section::before {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(168,85,247,0.35) 0%, transparent 70%);
+    top: -150px; left: -100px;
+}
+[data-theme="dark"] .home-section::after {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(245,200,66,0.25) 0%, transparent 70%);
+    bottom: -100px; right: -80px;
+    animation-delay: 4s;
+}
+@keyframes orbFloat {
+    0%   { transform: scale(1)   translate(0, 0); }
+    100% { transform: scale(1.15) translate(30px, -30px); }
+}
+
+/* ============================================================
+   GENERAL STYLES
+   ============================================================ */
 * {
     margin: 0;
     padding: 0;
@@ -7,10 +107,12 @@
 }
 
 body {
-    background: #f8f9fa;
-    color: #333;
+    background: var(--bg-primary);
+    color: var(--text-primary);
     scroll-behavior: smooth;
     overflow-x: hidden;
+    transition: var(--transition);
+    position: relative;
 }
 
 /* Navbar */
@@ -21,17 +123,19 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 1rem clamp(2rem, 8vw, 8rem);
-    background: rgba(255,255,255,0.95);
-    backdrop-filter: blur(10px);
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
     z-index: 1000;
-    box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 20px var(--shadow);
+    transition: var(--transition);
 }
 
 .navbar .logo {
     font-family: 'Raleway', sans-serif;
     font-size: clamp(1.5rem, 4vw, 2rem);
     font-weight: 700;
-    color: #333;
+    color: var(--text-primary);
+    transition: var(--transition);
 }
 
 .hamburger {
@@ -44,7 +148,7 @@ body {
 .hamburger span {
     width: 25px;
     height: 3px;
-    background: #333;
+    background: var(--text-primary);
     transition: 0.3s;
     border-radius: 2px;
 }
@@ -69,7 +173,7 @@ body {
 
 .navbar a {
     text-decoration: none;
-    color: #666;
+    color: var(--text-muted);
     font-weight: 500;
     transition: color 0.3s;
     padding: 0.5rem 0;
@@ -77,7 +181,7 @@ body {
 }
 
 .navbar a:hover, .navbar a.active {
-    color: #e91e63;
+    color: var(--accent);
 }
 
 /* Sections */
@@ -99,10 +203,11 @@ section h2 {
     margin-bottom: 2rem;
     margin-top: 1rem;
     text-align: center;
-    color: #333;
+    color: var(--text-primary);
     font-weight: 700;
     opacity: 1 !important;
     transform: none !important;
+    transition: var(--transition);
 }
 
 /* Home */
@@ -112,11 +217,12 @@ section h2 {
     align-items: center;
     gap: 4rem;
     min-height: 90vh;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
     position: relative;
     overflow: hidden;
     opacity: 1 !important;
     transform: none !important;
+    transition: var(--transition);
 }
 
 /* Floating AI Elements */
@@ -170,14 +276,14 @@ section h2 {
 .home-content h1 {
     font-size: clamp(2.5rem, 6vw, 4rem);
     margin-bottom: 1rem;
-    color: #333;
+    color: var(--text-primary);
     font-weight: 700;
     line-height: 1.2;
 }
 
 .home-content p {
     font-size: clamp(1.2rem, 3vw, 1.5rem);
-    color: #666;
+    color: var(--text-muted);
     margin-bottom: 2rem;
 }
 
@@ -194,13 +300,14 @@ section h2 {
     height: clamp(300px, 40vw, 500px);
     border-radius: 20px;
     object-fit: cover;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    box-shadow: 0 20px 60px var(--shadow);
+    transition: var(--transition);
 }
 
 .typing-text span {
     font-family: "Dancing Script", cursive;
     font-weight: 700;
-    color: #e91e63;
+    color: var(--accent);
 }
 
 /* Typing Effect */
@@ -216,7 +323,7 @@ section h2 {
 }
 
 #typewriter {
-    color: #e91e63;
+    color: var(--accent);
     font-weight: 600;
     transition: opacity 0.3s ease;
 }
@@ -227,14 +334,15 @@ section h2 {
 }
 
 @keyframes blink {
-    0%, 50% { border-color: #e91e63 }
+    0%, 50% { border-color: var(--accent) }
     51%, 100% { border-color: transparent }
 }
 
 /* About */
 .about-section {
-    background: #fff;
+    background: var(--bg-secondary);
     text-align: center;
+    transition: var(--transition);
 }
 
 .about-content {
@@ -255,12 +363,13 @@ section h2 {
     line-height: 1.8;
     text-align: justify;
     margin-bottom: 1.5rem;
-    color: #666;
+    color: var(--text-muted);
 }
 
 /* Skills */
 .skills-section {
-    background: #f8f9fa;
+    background: var(--bg-alt);
+    transition: var(--transition);
 }
 
 .skills-grid {
@@ -274,27 +383,29 @@ section h2 {
 }
 
 .skill-card {
-    background: #fff;
+    background: var(--card-bg);
     padding: 2rem 1.5rem;
     border-radius: 15px;
     text-align: center;
     font-weight: 600;
     font-size: clamp(1rem, 2.5vw, 1.1rem);
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s, var(--transition);
     cursor: pointer;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    border: 1px solid #f0f0f0;
+    box-shadow: 0 10px 30px var(--shadow);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
 }
 
 .skill-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 20px 60px rgba(233, 30, 99, 0.2);
-    border-color: #e91e63;
+    box-shadow: 0 20px 60px var(--shadow-accent);
+    border-color: var(--accent);
 }
 
 /* Projects */
 .projects-section {
-    background: #fff;
+    background: var(--bg-secondary);
+    transition: var(--transition);
 }
 
 .projects-grid {
@@ -308,12 +419,12 @@ section h2 {
 }
 
 .project-card {
-    background: #f8f9fa;
+    background: var(--card-alt);
     padding: 1.8rem 1.5rem;
     border-radius: 15px;
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s, var(--transition);
     cursor: pointer;
-    border: 1px solid #e91e63;
+    border: 1px solid var(--accent);
     min-height: 180px;
     display: flex;
     flex-direction: column;
@@ -322,27 +433,27 @@ section h2 {
 .project-card h3 {
     font-size: clamp(1.15rem, 3.5vw, 1.4rem);
     margin-bottom: 0.8rem;
-    color: #333;
+    color: var(--text-primary);
     font-weight: 700;
 }
 
 .project-card p {
     font-size: clamp(0.9rem, 2.5vw, 1rem);
     line-height: 1.5;
-    color: #666;
+    color: var(--text-muted);
     flex-grow: 1;
 }
 
 .project-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 15px 40px rgba(244, 72, 115, 0.35);
+    box-shadow: 0 15px 40px var(--shadow-accent);
 }
 
 .view-project {
     display: inline-block;
     margin-top: 1rem;
     font-size: clamp(0.85rem, 2.3vw, 0.95rem);
-    color: #e91e63;
+    color: var(--accent);
     font-weight: 600;
     transition: transform 0.3s;
 }
@@ -353,7 +464,8 @@ section h2 {
 
 /* Internship */
 .internship-section {
-    background: #f8f9fa;
+    background: var(--bg-alt);
+    transition: var(--transition);
 }
 
 .internship-grid {
@@ -367,12 +479,12 @@ section h2 {
 }
 
 .internship-card {
-    background: #fff;
+    background: var(--card-bg);
     padding: 1.8rem 1.5rem;
     border-radius: 15px;
-    transition: transform 0.3s, box-shadow 0.3s;
-    border: 1px solid #e91e63;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s, box-shadow 0.3s, var(--transition);
+    border: 1px solid var(--accent);
+    box-shadow: 0 8px 20px var(--shadow);
     cursor: pointer;
     position: relative;
 }
@@ -380,20 +492,20 @@ section h2 {
 .internship-card h3 {
     font-size: clamp(1.15rem, 3.5vw, 1.4rem);
     margin-bottom: 0.6rem;
-    color: #333;
+    color: var(--text-primary);
     font-weight: 700;
 }
 
 .internship-card .company {
     font-size: clamp(0.95rem, 2.8vw, 1.1rem);
     font-weight: 600;
-    color: #e91e63;
+    color: var(--accent);
     margin-bottom: 0.4rem;
 }
 
 .internship-card .duration {
     font-size: clamp(0.85rem, 2.3vw, 0.95rem);
-    color: #666;
+    color: var(--text-muted);
     margin-bottom: 0.8rem;
     font-style: italic;
 }
@@ -401,19 +513,19 @@ section h2 {
 .internship-card .description {
     font-size: clamp(0.9rem, 2.5vw, 1rem);
     line-height: 1.5;
-    color: #666;
+    color: var(--text-muted);
 }
 
 .internship-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 15px 40px rgba(233, 30, 99, 0.25);
+    box-shadow: 0 15px 40px var(--shadow-accent);
 }
 
 .view-certificate {
     display: inline-block;
     margin-top: 1rem;
     font-size: clamp(0.85rem, 2.3vw, 0.95rem);
-    color: #e91e63;
+    color: var(--accent);
     font-weight: 600;
     transition: transform 0.3s;
 }
@@ -424,13 +536,14 @@ section h2 {
 
 /* Contact */
 #contact {
-    background: #f8f9fa;
+    background: var(--bg-alt);
     text-align: center;
+    transition: var(--transition);
 }
 
 #contact h2 {
     text-align: center !important;
-    color: #333;
+    color: var(--text-primary);
 }
 
 #contact form {
@@ -439,15 +552,16 @@ section h2 {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    background: #fff;
+    background: var(--card-bg);
     padding: 3rem;
     border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    box-shadow: 0 20px 60px var(--shadow);
+    transition: var(--transition);
 }
 
 #contact input, #contact textarea {
     padding: 1.2rem;
-    border: 2px solid #333;
+    border: 2px solid var(--text-muted);
     border-radius: 10px;
     font-size: clamp(1rem, 3vw, 1.1rem);
     font-family: inherit;
@@ -456,12 +570,12 @@ section h2 {
 
 #contact input:focus, #contact textarea:focus {
     outline: none;
-    border-color: #e91e63;
+    border-color: var(--accent);
 }
 
 #contact button {
     padding: 1.2rem;
-    background: #e91e63;
+    background: var(--accent);
     border: none;
     border-radius: 10px;
     font-size: clamp(1rem, 3vw, 1.1rem);
@@ -474,7 +588,7 @@ section h2 {
 }
 
 #contact button:hover {
-    background: #c2185b;
+    background: var(--accent-hover);
     transform: translateY(-2px);
 }
 
@@ -549,4 +663,141 @@ section h2 {
     #contact form {
         padding: 2rem;
     }
+}
+
+/* Chatbot */
+.chatbot-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1001;
+}
+
+.chatbot-toggle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #e91e63;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(233, 30, 99, 0.4);
+    transition: transform 0.3s;
+}
+
+.chatbot-toggle:hover {
+    transform: scale(1.1);
+}
+
+.chatbot-toggle span {
+    font-size: 28px;
+}
+
+.chatbot-window {
+    position: absolute;
+    bottom: 80px;
+    right: 0;
+    width: 350px;
+    height: 500px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.chatbot-window.active {
+    display: flex;
+}
+
+.chatbot-header {
+    background: #e91e63;
+    color: #fff;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chatbot-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.chatbot-close {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+}
+
+.chatbot-messages {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.bot-message, .user-message {
+    padding: 0.8rem 1rem;
+    border-radius: 10px;
+    max-width: 80%;
+    word-wrap: break-word;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.bot-message {
+    background: #f0f0f0;
+    align-self: flex-start;
+    color: #333;
+}
+
+.user-message {
+    background: #e91e63;
+    color: #fff;
+    align-self: flex-end;
+}
+
+.chatbot-input-area {
+    display: flex;
+    padding: 1rem;
+    border-top: 1px solid #e0e0e0;
+    gap: 0.5rem;
+}
+
+.chatbot-input-area input {
+    flex: 1;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.chatbot-input-area input:focus {
+    border-color: #e91e63;
+}
+
+.chatbot-input-area button {
+    padding: 0.8rem 1.2rem;
+    background: #e91e63;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.chatbot-input-area button:hover {
+    background: #c2185b;
 }
