@@ -38,31 +38,27 @@ function typeEffect() {
 
 typeEffect();
 
-// Animate Stat Numbers on Load
+// Animate Stat Numbers – triggered after intro finishes
 function animateHeroStats() {
     const statCards = document.querySelectorAll('.hero-stat-card .stat-number');
     statCards.forEach(stat => {
+        const suffix = stat.querySelector('span') ? stat.querySelector('span').textContent : '';
         const fullText = stat.textContent.trim();
         const numMatch = fullText.match(/\d+/);
-        if (numMatch) {
-            const targetVal = parseInt(numMatch[0], 10);
-            let current = 0;
-            const duration = 1200;
-            const stepTime = Math.abs(Math.floor(duration / targetVal));
-            const timer = setInterval(() => {
-                current += 1;
-                stat.innerHTML = `${current}<span>+</span>`;
-                if (current >= targetVal) {
-                    clearInterval(timer);
-                }
-            }, Math.max(stepTime, 60));
-        }
+        if (!numMatch) return;
+        const target = parseInt(numMatch[0], 10);
+        let current = 0;
+        stat.innerHTML = `0<span>${suffix}</span>`;
+        const duration = 1000;
+        const steps = target;
+        const stepTime = Math.max(Math.floor(duration / steps), 40);
+        const timer = setInterval(() => {
+            current++;
+            stat.innerHTML = `${current}<span>${suffix}</span>`;
+            if (current >= target) clearInterval(timer);
+        }, stepTime);
     });
 }
-
-window.addEventListener('DOMContentLoaded', () => {
-    setTimeout(animateHeroStats, 300);
-});
 
 // Mobile hamburger menu
 const hamburger = document.querySelector('.hamburger');
@@ -863,6 +859,7 @@ chatbotInput.addEventListener('keypress', (e) => {
             // Trigger hero entry animations cleanly
             const homeSection = document.getElementById('home');
             if (homeSection) homeSection.classList.add('show-3d');
+            animateHeroStats();
         }, 800);
     }
 
@@ -878,4 +875,19 @@ chatbotInput.addEventListener('keypress', (e) => {
 
     // Start Intro Render Loop
     animFrameId = requestAnimationFrame(render);
+})();
+
+/* ============================================================
+   SKILLS CAROUSEL – left-to-right loop, pause on hover
+   ============================================================ */
+(function initSkillsCarousel() {
+    const track = document.getElementById('skillsTrack');
+    if (!track) return;
+
+    // Prepend clones so initial -50% offset shows the originals
+    const original = Array.from(track.children);
+    original.forEach(card => track.insertBefore(card.cloneNode(true), track.firstChild));
+
+    track.addEventListener('mouseenter', () => track.classList.add('paused'));
+    track.addEventListener('mouseleave', () => track.classList.remove('paused'));
 })();
